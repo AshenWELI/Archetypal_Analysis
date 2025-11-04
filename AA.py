@@ -17,36 +17,50 @@ def project_to_simplex(v):
 
 def solve_simplex_least_squares(B, y, max_iter=500, tol=1e-6):
     """
-    Solve:  min_s  || B s - y ||^2   subject to s >= 0, sum(s) = 1
+    Solve:  min_s  || B^T s - y ||^2   subject to s >= 0, sum(s) = 1
     using projected gradient descent (PGD).
+    
+    Note: B should be passed as the matrix (not transposed), and this
+    function will compute B^T @ (B^T @ s - y) for the gradient.
     """
-    K = B.shape[1]
+    K = B.shape[0]  # B is (M, K) so we want K archetypes
     s = np.ones(K) / K  # start uniform
+    
+    # For min ||B^T s - y||^2, gradient is: B @ (B^T @ s - y)
+    # Step size based on Lipschitz constant
     step_size = 1.0 / (np.linalg.norm(B, 2) ** 2 + 1e-12)
 
     prev_val = np.inf
     for _ in range(max_iter):
-        grad = B.T @ (B @ s - y)
+        grad = B @ (B.T @ s - y)  # Gradient for ||B^T s - y||^2
         s = s - step_size * grad
         s = project_to_simplex(s)
 
-        val = 0.5 * np.linalg.norm(B @ s - y) ** 2
+        val = 0.5 * np.linalg.norm(B.T @ s - y) ** 2
         if abs(prev_val - val) < tol * (1 + prev_val):
             break
         prev_val = val
     return s
 
 
-def archetypal_analysis(X, K, max_iter=50, tol=1e-5, random_state=0):
+def archetypal_analysis(X, K, max_iter=50, tol=1e-5, random_state=0, verbose=True):
     """
     Archetypal Analysis (AA) via alternating optimization.
+    
+    Follows Algorithm 1: min ||X - S*C*X||_F^2 = min ||X - S*A||_F^2
+    where A = C*X are the archetypes.
+    
     Args:
-        X: (N, M) data matrix
+        X: (N, M) data matrix (N samples, M features)
         K: number of archetypes
+        max_iter: maximum iterations
+        tol: convergence tolerance
+        random_state: random seed
+        
     Returns:
-        S: (N, K) coefficients for data points in archetype space
-        C: (K, N) coefficients for archetypes in data space
-        A: (K, M) archetypes
+        S: (N, K) coefficients for data points in archetype space (s_n >= 0, sum=1)
+        C: (K, N) coefficients for archetypes in data space (c_k >= 0, sum=1)
+        A: (K, M) archetypes where A = C*X
     """
     rng = np.random.default_rng(random_state)
     N, M = X.shape
@@ -59,25 +73,35 @@ def archetypal_analysis(X, K, max_iter=50, tol=1e-5, random_state=0):
     C = np.ones((K, N)) / N
     prev_obj = np.inf
 
-    for _ in range(max_iter):
-        # --- Update S row by row ---
+    for iteration in range(max_iter):
+        # --- Step 1: Update S row by row ---
+        # For each data point n, solve: min ||A^T s_n - x_n||^2 s.t. s_n >= 0, sum(s_n) = 1
         for n in range(N):
-            S[n, :] = solve_simplex_least_squares(A.T, X[n, :])
+            S[n, :] = solve_simplex_least_squares(A, X[n, :])
 
-        # --- Update A via least squares ---
-        StS = S.T @ S + 1e-10 * np.eye(K)  # stability
+        # --- Step 2: Update A via least squares ---
+        # A = (S^T S)^{-1} S^T X
+        StS = S.T @ S + 1e-10 * np.eye(K)  # Add small regularization for stability
         A = np.linalg.solve(StS, S.T @ X)
 
-        # --- Update C row by row ---
+        # --- Step 3: Update C row by row ---
+        # For each archetype k, solve: min ||X^T c_k - a_k||^2 s.t. c_k >= 0, sum(c_k) = 1
         for k in range(K):
-            C[k, :] = solve_simplex_least_squares(X.T, A[k, :])
+            C[k, :] = solve_simplex_least_squares(X, A[k, :])
 
-        # --- Update A using C ---
+        # --- Step 4: Update A using C ---
+        # A = C * X (archetypes are convex combinations of data points)
         A = C @ X
 
         # --- Check convergence ---
+        # RSS = ||X - S*A||_F^2 = ||X - S*C*X||_F^2
         obj = 0.5 * np.linalg.norm(X - S @ A, "fro") ** 2
+
+        if verbose and iteration % 5 == 0:
+            print(f"Iteration {iteration:3d}, RSS = {obj:.4e}")
         if abs(prev_obj - obj) < tol * (1 + prev_obj):
+            if verbose:
+                print(f"Converged at iteration {iteration}, RSS = {obj:.4e}")
             break
         prev_obj = obj
 
