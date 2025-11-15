@@ -1,8 +1,14 @@
 import numpy as np
 import os
-from scipy.sparse import csr_matrix
 import matplotlib.pyplot as plt
+from scipy.sparse import csr_matrix
 from AA import archetypal_analysis 
+from sklearn.decomposition import NMF, LatentDirichletAllocation
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score, calinski_harabasz_score
+import time
+import warnings
+warnings.filterwarnings('ignore')
 
 
 # ============================================================================
@@ -116,75 +122,266 @@ def top_words_per_archetype(A, vocab, top_n=10):
         for word, weight in top_words:
             print(f"  {word:20s} {weight:.4f}")
 
-
 # ============================================================================
-# Main Execution
+# Model Comparison Functions
 # ============================================================================
 
-if __name__ == "__main__":
-    # Set local data directory
-    data_dir = r"D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis\data\test_data"
+def run_nmf(X, K, random_state=0, verbose=False):
+    """Run Non-negative Matrix Factorization."""
+    if verbose:
+        print(f"\nRunning NMF with K={K}...")
     
-    # Check if required files exist
-    print("Checking for NIPS dataset files...")
-    check_nips_data(data_dir)
+    start_time = time.time()
+    model = NMF(n_components=K, init='random', random_state=random_state, 
+                max_iter=200, verbose=0)
+    W = model.fit_transform(X)  # Document-topic matrix (N x K)
+    H = model.components_       # Topic-word matrix (K x M)
     
-    # Load dataset (use max_docs to limit size for testing)
-    # For full dataset, remove max_docs parameter
-    X, vocab = load_nips_data(data_dir, max_docs=500)
+    # Normalize W to get probability distribution
+    W_norm = W / (W.sum(axis=1, keepdims=True) + 1e-10)
     
-    # Normalize documents
-    X_norm = normalize_documents(X)
+    elapsed = time.time() - start_time
     
-    print(f"\nDataset shape: {X_norm.shape}")
-    print(f"Vocabulary size: {len(vocab)}")
+    # Compute reconstruction error
+    reconstruction = W @ H
+    rss = np.linalg.norm(X - reconstruction, 'fro') ** 2
     
-    # Run Archetypal Analysis
-    K = 5  # Number of archetypes (topics)
-    print(f"\nRunning Archetypal Analysis with K={K} archetypes...")
+    if verbose:
+        print(f"  Completed in {elapsed:.2f}s, RSS = {rss:.4e}")
     
-    S, C, A = archetypal_analysis(X_norm, K=K, max_iter=30, verbose=True)
+    return W_norm, H, rss, elapsed
+
+
+def run_kmeans(X, K, random_state=0, verbose=False):
+    """Run K-means clustering."""
+    if verbose:
+        print(f"\nRunning K-means with K={K}...")
     
-    # Display results
-    print(f"\nResults:")
-    print(f"  S shape (documents × archetypes): {S.shape}")
-    print(f"  C shape (archetypes × documents): {C.shape}")
-    print(f"  A shape (archetypes × vocabulary): {A.shape}")
+    start_time = time.time()
+    model = KMeans(n_clusters=K, random_state=random_state, n_init=10, max_iter=300)
+    labels = model.fit_predict(X)
+    centers = model.cluster_centers_  # (K x M)
     
-    # Show top words for each archetype
-    top_words_per_archetype(A, vocab, top_n=15)
+    # Create one-hot encoding for hard assignments
+    W = np.zeros((X.shape[0], K))
+    W[np.arange(X.shape[0]), labels] = 1.0
     
-    # Compute final reconstruction error
+    elapsed = time.time() - start_time
+    
+    # Compute reconstruction error
+    reconstruction = W @ centers
+    rss = np.linalg.norm(X - reconstruction, 'fro') ** 2
+    
+    # Compute clustering metrics
+    silhouette = silhouette_score(X, labels)
+    calinski = calinski_harabasz_score(X, labels)
+    
+    if verbose:
+        print(f"  Completed in {elapsed:.2f}s, RSS = {rss:.4e}")
+        print(f"  Silhouette Score: {silhouette:.4f}, Calinski-Harabasz: {calinski:.2f}")
+    
+    return W, centers, rss, elapsed, silhouette, calinski
+
+
+def run_lda(X, K, random_state=0, verbose=False):
+    """Run Latent Dirichlet Allocation."""
+    if verbose:
+        print(f"\nRunning LDA with K={K}...")
+    
+    start_time = time.time()
+    model = LatentDirichletAllocation(n_components=K, random_state=random_state,
+                                     max_iter=20, learning_method='batch', verbose=0)
+    W = model.fit_transform(X)  # Document-topic distribution (N x K)
+    H = model.components_        # Topic-word distribution (K x M)
+    
+    elapsed = time.time() - start_time
+    
+    # Compute reconstruction error (approximate for LDA)
+    reconstruction = W @ H
+    rss = np.linalg.norm(X - reconstruction, 'fro') ** 2
+    
+    # Compute perplexity
+    perplexity = model.perplexity(X)
+    
+    if verbose:
+        print(f"  Completed in {elapsed:.2f}s, RSS = {rss:.4e}")
+        print(f"  Perplexity: {perplexity:.2f}")
+    
+    return W, H, rss, elapsed, perplexity
+
+
+def run_aa(X, K, random_state=0, verbose=False):
+    """Run Archetypal Analysis."""
+    if verbose:
+        print(f"\nRunning Archetypal Analysis with K={K}...")
+    
+    start_time = time.time()
+    S, C, A = archetypal_analysis(X, K, max_iter=50, random_state=random_state, verbose=verbose)
+    elapsed = time.time() - start_time
+    
     reconstruction = S @ A
-    rss = np.linalg.norm(X_norm - reconstruction, 'fro') ** 2
-    print(f"\nFinal RSS (Residual Sum of Squares): {rss:.4e}")
+    rss = np.linalg.norm(X - reconstruction, 'fro') ** 2
     
-    # Show statistics
-    print("\n" + "="*80)
-    print("STATISTICS")
-    print("="*80)
-    print(f"Mean archetype sparsity (C): {np.mean(np.sum(C > 1e-3, axis=1)):.2f} documents per archetype")
-    print(f"Mean document representation (S): {np.mean(np.sum(S > 1e-3, axis=1)):.2f} archetypes per document")
+    if verbose:
+        print(f"  Completed in {elapsed:.2f}s, RSS = {rss:.4e}")
     
-    # Plot archetype weights for first few documents
-    plt.figure(figsize=(12, 4))
+    return S, A, rss, elapsed
+# ============================================================================
+# Analysis and Visualization Functions
+# ============================================================================
+
+def top_words_comparison(vocab, aa_archetypes, nmf_topics, kmeans_centers, lda_topics, top_n=10):
+    """Display top words for each method side by side."""
+    K = aa_archetypes.shape[0]
     
-    plt.subplot(1, 2, 1)
-    plt.imshow(S[:50, :].T, aspect='auto', cmap='viridis', interpolation='nearest')
-    plt.colorbar(label='Weight')
-    plt.xlabel('Document')
-    plt.ylabel('Archetype')
-    plt.title('Archetype Weights for First 50 Documents')
+    print("\n" + "="*120)
+    print("TOP WORDS COMPARISON")
+    print("="*120)
     
-    plt.subplot(1, 2, 2)
-    plt.imshow(C, aspect='auto', cmap='viridis', interpolation='nearest')
-    plt.colorbar(label='Weight')
-    plt.xlabel('Document (all)')
-    plt.ylabel('Archetype')
-    plt.title('Document Weights for Each Archetype')
+    for k in range(K):
+        print(f"\n{'='*120}")
+        print(f"Component/Topic/Cluster {k+1}:")
+        print(f"{'='*120}")
+        
+        # Archetypal Analysis
+        aa_idx = np.argsort(aa_archetypes[k, :])[-top_n:][::-1]
+        aa_words = [f"{vocab[i]} ({aa_archetypes[k, i]:.3f})" for i in aa_idx]
+        
+        # NMF
+        nmf_idx = np.argsort(nmf_topics[k, :])[-top_n:][::-1]
+        nmf_words = [f"{vocab[i]} ({nmf_topics[k, i]:.3f})" for i in nmf_idx]
+        
+        # K-means
+        km_idx = np.argsort(kmeans_centers[k, :])[-top_n:][::-1]
+        km_words = [f"{vocab[i]} ({kmeans_centers[k, i]:.3f})" for i in km_idx]
+        
+        # LDA
+        lda_idx = np.argsort(lda_topics[k, :])[-top_n:][::-1]
+        lda_words = [f"{vocab[i]} ({lda_topics[k, i]:.3f})" for i in lda_idx]
+        
+        # Print in columns
+        print(f"{'AA':<30} {'NMF':<30} {'K-means':<30} {'LDA':<30}")
+        print(f"{'-'*30} {'-'*30} {'-'*30} {'-'*30}")
+        for i in range(top_n):
+            print(f"{aa_words[i]:<30} {nmf_words[i]:<30} {km_words[i]:<30} {lda_words[i]:<30}")
+
+
+def plot_comparison_results(aa_S, nmf_W, kmeans_W, lda_W, aa_rss, nmf_rss, km_rss, lda_rss,
+                           aa_time, nmf_time, km_time, lda_time):
+    """Create comprehensive comparison plots."""
+    fig = plt.figure(figsize=(16, 10))
+    
+    # Plot 1: Document representations (first 50 docs)
+    methods = ['AA', 'NMF', 'K-means', 'LDA']
+    representations = [aa_S[:50, :].T, nmf_W[:50, :].T, kmeans_W[:50, :].T, lda_W[:50, :].T]
+    
+    for i, (method, rep) in enumerate(zip(methods, representations)):
+        plt.subplot(3, 4, i+1)
+        plt.imshow(rep, aspect='auto', cmap='viridis', interpolation='nearest')
+        plt.colorbar(label='Weight')
+        plt.xlabel('Document')
+        plt.ylabel('Component/Topic')
+        plt.title(f'{method}: Doc Representations')
+    
+    # Plot 2: Sparsity patterns
+    for i, (method, rep) in enumerate(zip(methods, representations)):
+        plt.subplot(3, 4, i+5)
+        sparsity_per_doc = np.sum(rep.T > 0.01, axis=1)
+        plt.hist(sparsity_per_doc, bins=20, edgecolor='black', alpha=0.7)
+        plt.xlabel('Number of Active Components')
+        plt.ylabel('Frequency')
+        plt.title(f'{method}: Component Sparsity')
+        plt.axvline(np.mean(sparsity_per_doc), color='r', linestyle='--', 
+                   label=f'Mean: {np.mean(sparsity_per_doc):.2f}')
+        plt.legend()
+    
+    # Plot 3: Reconstruction error comparison
+    plt.subplot(3, 4, 9)
+    rss_values = [aa_rss, nmf_rss, km_rss, lda_rss]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+    bars = plt.bar(methods, rss_values, color=colors, alpha=0.7, edgecolor='black')
+    plt.ylabel('Reconstruction Error (RSS)')
+    plt.title('Reconstruction Error Comparison')
+    plt.yscale('log')
+    for bar, val in zip(bars, rss_values):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.2e}', ha='center', va='bottom', fontsize=9)
+    
+    # Plot 4: Computation time comparison
+    plt.subplot(3, 4, 10)
+    time_values = [aa_time, nmf_time, km_time, lda_time]
+    bars = plt.bar(methods, time_values, color=colors, alpha=0.7, edgecolor='black')
+    plt.ylabel('Time (seconds)')
+    plt.title('Computation Time Comparison')
+    for bar, val in zip(bars, time_values):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.2f}s', ha='center', va='bottom', fontsize=9)
+    
+    # Plot 5: Normalized RSS per sample
+    plt.subplot(3, 4, 11)
+    N = aa_S.shape[0]
+    rss_per_sample = [r/N for r in rss_values]
+    bars = plt.bar(methods, rss_per_sample, color=colors, alpha=0.7, edgecolor='black')
+    plt.ylabel('RSS per Document')
+    plt.title('Normalized Reconstruction Error')
+    for bar, val in zip(bars, rss_per_sample):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.2e}', ha='center', va='bottom', fontsize=9)
+    
+    # Plot 6: Average component usage
+    plt.subplot(3, 4, 12)
+    avg_usage = []
+    for rep in [aa_S, nmf_W, kmeans_W, lda_W]:
+        avg_usage.append(np.mean(np.sum(rep > 0.01, axis=1)))
+    bars = plt.bar(methods, avg_usage, color=colors, alpha=0.7, edgecolor='black')
+    plt.ylabel('Avg Components per Document')
+    plt.title('Average Component Usage')
+    for bar, val in zip(bars, avg_usage):
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.2f}', ha='center', va='bottom', fontsize=9)
     
     plt.tight_layout()
-    plt.savefig('archetypal_analysis_results.png', dpi=150, bbox_inches='tight')
-    print("\nPlot saved as 'archetypal_analysis_results.png'")
+    plt.savefig('method_comparison_results.png', dpi=150, bbox_inches='tight')
+    print("\nComparison plot saved as 'method_comparison_results.png'")
+
+
+def print_summary_statistics(aa_S, nmf_W, kmeans_W, lda_W, aa_rss, nmf_rss, km_rss, lda_rss,
+                            aa_time, nmf_time, km_time, lda_time, km_sil, km_cal, lda_perp):
+    """Print summary statistics table."""
+    print("\n" + "="*100)
+    print("SUMMARY STATISTICS")
+    print("="*100)
+
+    # Show top words for each archetype
+    #top_words_per_archetype(A, vocab, top_n=15)
     
-    plt.show()
+    print(f"\n{'Metric':<40} {'AA':<15} {'NMF':<15} {'K-means':<15} {'LDA':<15}")
+    print("-"*100)
+    
+    # Reconstruction error
+    print(f"{'Reconstruction Error (RSS)':<40} {aa_rss:<15.4e} {nmf_rss:<15.4e} {km_rss:<15.4e} {lda_rss:<15.4e}")
+    
+    # Normalized RSS
+    N = aa_S.shape[0]
+    print(f"{'RSS per Document':<40} {aa_rss/N:<15.4e} {nmf_rss/N:<15.4e} {km_rss/N:<15.4e} {lda_rss/N:<15.4e}")
+    
+    # Computation time
+    print(f"{'Computation Time (s)':<40} {aa_time:<15.2f} {nmf_time:<15.2f} {km_time:<15.2f} {lda_time:<15.2f}")
+    
+    # Sparsity
+    aa_sparse = np.mean(np.sum(aa_S > 0.01, axis=1))
+    nmf_sparse = np.mean(np.sum(nmf_W > 0.01, axis=1))
+    km_sparse = np.mean(np.sum(kmeans_W > 0.01, axis=1))
+    lda_sparse = np.mean(np.sum(lda_W > 0.01, axis=1))
+    print(f"{'Avg Active Components/Doc':<40} {aa_sparse:<15.2f} {nmf_sparse:<15.2f} {km_sparse:<15.2f} {lda_sparse:<15.2f}")
+    
+    # Method-specific metrics
+    print(f"{'Silhouette Score (K-means)':<40} {'-':<15} {'-':<15} {km_sil:<15.4f} {'-':<15}")
+    print(f"{'Calinski-Harabasz (K-means)':<40} {'-':<15} {'-':<15} {km_cal:<15.2f} {'-':<15}")
+    print(f"{'Perplexity (LDA)':<40} {'-':<15} {'-':<15} {'-':<15} {lda_perp:<15.2f}")
+    
+    print("="*100)
