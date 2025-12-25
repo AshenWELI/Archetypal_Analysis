@@ -1,0 +1,213 @@
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis> & C:/Users/PC/AppData/Local/Programs/Python/Python312/python.exe "d:/liu master/Statistics and ML/sem5/732A76 Research Project/project/Archetypal_Analysis/main_abstract.py"
+Loaded 1000 abstracts from data/openreview_data/ICLR_2019_papers.jsonl
+TF-IDF Matrix shape: (1000, 4566)
+Vocabulary size: 4566
+
+Running topic modeling with K=5...
+
+
+====================================================================================================
+SUMMARY STATISTICS
+====================================================================================================
+
+Metric                                   AA              NMF             K-means         LDA
+----------------------------------------------------------------------------------------------------
+Reconstruction Error (RSS)               9.3101e+02      9.2723e+02      9.3674e+02      3.3779e+07
+RSS per Document                         9.3101e-01      9.2723e-01      9.3674e-01      3.3779e+04
+Computation Time (s)                     288.55          1.15            2.03            3.10
+Avg Active Components/Doc                2.94            3.15            1.00            5.00
+Silhouette Score (K-means)               -               -               0.0092          -
+Calinski-Harabasz (K-means)              -               -               6.54            -
+Perplexity (LDA)                         -               -               -               7878.91
+====================================================================================================
+
+========================================================================================================================
+TOP WORDS COMPARISON
+========================================================================================================================
+
+========================================================================================================================
+Component/Topic/Cluster 1:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+graph (0.433)                  policy (1.301)                 graph (0.355)                  basketball (0.200)
+graphs (0.118)                 learning (1.204)               graphs (0.102)                 closer (0.200)
+node (0.102)                   agent (0.934)                  node (0.075)                   hints (0.200)
+nodes (0.082)                  reward (0.856)                 nodes (0.072)                  infers (0.200)
+embedding (0.064)              reinforcement (0.844)          learning (0.047)               goes (0.200)
+structure (0.054)              environment (0.724)            structure (0.041)              presenting (0.200)
+prediction (0.048)             agents (0.698)                 knowledge (0.041)              opportunity (0.200)
+representation (0.046)         rl (0.560)                     prediction (0.040)             1k (0.200)
+learning (0.044)               policies (0.547)               embedding (0.037)              cauchy (0.200)
+methods (0.040)                rewards (0.535)                link (0.035)                   formulas (0.200)
+
+========================================================================================================================
+Component/Topic/Cluster 2:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+models (0.048)                 graph (1.798)                  adversarial (0.097)            basketball (0.200)
+data (0.048)                   graphs (0.509)                 training (0.049)               closer (0.200)
+latent (0.047)                 node (0.404)                   examples (0.045)               hints (0.200)
+model (0.046)                  nodes (0.367)                  data (0.042)                   infers (0.200)
+image (0.033)                  embedding (0.280)              robustness (0.042)             goes (0.200)
+generative (0.029)             structure (0.267)              attacks (0.042)                presenting (0.200)
+language (0.029)               embeddings (0.213)             distribution (0.036)           opportunity (0.200)
+representations (0.028)        prediction (0.208)             image (0.033)                  1k (0.200)
+distribution (0.026)           representation (0.201)         networks (0.033)               cauchy (0.200)
+learning (0.025)               learning (0.190)               samples (0.033)                formulas (0.200)
+
+========================================================================================================================
+Component/Topic/Cluster 3:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+networks (0.060)               networks (0.732)               policy (0.096)                 learning (40.152)
+gradient (0.046)               neural (0.595)                 learning (0.085)               model (31.098)
+neural (0.046)                 network (0.559)                agent (0.074)                  data (29.567)
+network (0.045)                gradient (0.543)               reinforcement (0.064)          training (28.226)
+training (0.040)               training (0.487)               reward (0.061)                 networks (27.454)
+sgd (0.034)                    deep (0.448)                   agents (0.059)                 models (25.649)
+deep (0.034)                   sgd (0.362)                    environment (0.053)            neural (25.618)
+convergence (0.033)            loss (0.362)                   rl (0.045)                     network (23.797)
+layer (0.031)                  convergence (0.353)            policies (0.041)               method (21.888)
+loss (0.029)                   optimization (0.344)           algorithms (0.040)             adversarial (21.298)
+
+========================================================================================================================
+Component/Topic/Cluster 4:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+adversarial (0.262)            adversarial (1.633)            networks (0.049)               sat (1.135)
+attacks (0.118)                attacks (0.726)                neural (0.042)                 formulas (1.088)
+robustness (0.109)             examples (0.669)               network (0.042)                hundreds (0.209)
+examples (0.103)               robustness (0.668)             learning (0.034)               assignments (0.207)
+training (0.066)               attack (0.412)                 training (0.033)               satisfiability (0.205)
+attack (0.066)                 training (0.376)               deep (0.030)                   clique (0.204)
+defense (0.063)                perturbations (0.356)          gradient (0.030)               boolean (0.203)
+perturbations (0.059)          defense (0.339)                loss (0.022)                   np (0.202)
+networks (0.047)               networks (0.289)               layer (0.022)                  coloring (0.202)
+box (0.044)                    box (0.288)                    method (0.022)                 satisfying (0.202)
+
+========================================================================================================================
+Component/Topic/Cluster 5:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+policy (0.119)                 data (0.622)                   model (0.049)                  hints (1.641)
+learning (0.096)               model (0.586)                  models (0.045)                 basketball (0.206)
+agent (0.086)                  latent (0.571)                 data (0.039)                   wmt14 (0.205)
+reward (0.080)                 models (0.569)                 latent (0.039)                 inferior (0.202)
+reinforcement (0.077)          image (0.376)                  learning (0.031)               29 (0.202)
+environment (0.068)            distribution (0.361)           representations (0.026)        tokens (0.202)
+agents (0.063)                 generative (0.355)             language (0.026)               en (0.202)
+policies (0.052)               representations (0.317)        tasks (0.023)                  24 (0.201)
+rewards (0.052)                language (0.307)               variational (0.023)            transferring (0.201)
+rl (0.050)                     variational (0.302)            image (0.022)                  pruned (0.201)
+
+====================================================================================================
+RUNNING COMPREHENSIVE ANALYSIS
+====================================================================================================
+
+Computing comprehensive statistics...
+  ✓ Statistics computed for all methods
+
+====================================================================================================
+COMPREHENSIVE METHOD COMPARISON
+====================================================================================================
+
+Metric                                        NMF             AA              K-means         LDA
+----------------------------------------------------------------------------------------------------
+% Non-zero entries in S                        65.9%         62.8%         20.0%        100.0%
+Avg. cosine angle (degrees)                    75.7°         72.2°         62.4°         25.2°
+Reconstruction error (Frobenius)                75.38        30.51        30.61      5811.93
+Avg. active components/document                3.30         3.14         1.00         5.00
+
+====================================================================================================
+INTERPRETATION
+====================================================================================================
+• Lower % non-zero = More sparse (easier to interpret)
+• Higher cosine angle = More distinct components
+• Lower reconstruction error = Better fit to data
+• Lower active components = More focused representation
+====================================================================================================
+
+✓ Saved statistics to: comprehensive_statistics.csv
+
+Creating word comparison table...
+  ✓ Saved word table: word_comparison_table.png
+
+====================================================================================================
+✓ Comprehensive analysis complete!
+====================================================================================================
+
+Generated files:
+  • comprehensive_statistics.csv
+  • word_comparison_table.png
+
+Comparison plot saved as 'method_comparison_results.png'
+
+====================================================================================================
+CREATING AA CONVEX HULL VISUALIZATION
+====================================================================================================
+
+Creating AA convex hull visualization (K=5)...
+  Reducing to 2D with t-SNE...
+  Archetype positions in 2D: (5, 2)
+  ✓ Drew convex hull with 5 vertices
+  ✓ Saved: aa_convex_hull_K5.png
+  ✓ Saved: aa_convex_hull_K5.pdf
+
+ Key Findings:
+----------------------------------------------------------------------------------------------------
+  Sparsity (lower = better):
+    AA:      62.8% ✓ Best
+    NMF:     65.9%
+    K-means: 20.0%
+    LDA:     100.0%
+
+  Reconstruction Error (lower = better):
+    AA:      30.51 ✓ Best
+    NMF:     75.38
+    K-means: 30.61
+    LDA:     5811.93
+
+  Distinctiveness (higher = better):
+    AA:      72.2°
+    NMF:     75.7°
+    K-means: 62.4°
+    LDA:     25.2°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis>
+
+
+
+
+
+    LDA:     25.2°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis>
+    LDA:     25.2°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+    LDA:     25.2°
+
+====================================================================================================
+Analysis complete!
+    LDA:     25.2°
+
+    LDA:     25.2°
+    LDA:     25.2°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis>

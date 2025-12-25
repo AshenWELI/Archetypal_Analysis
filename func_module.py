@@ -126,6 +126,7 @@ def top_words_per_archetype(A, vocab, top_n=10):
 # Model Comparison Functions
 # ============================================================================
 
+# Reference from https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.NMF.html .See more for example uses.
 def run_nmf(X, K, random_state=0, verbose=False):
     """Run Non-negative Matrix Factorization."""
     if verbose:
@@ -149,9 +150,9 @@ def run_nmf(X, K, random_state=0, verbose=False):
     if verbose:
         print(f"  Completed in {elapsed:.2f}s, RSS = {rss:.4e}")
     
-    return W_norm, H, rss, elapsed
+    return W, H, rss, elapsed
 
-
+# Reference from https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html .See more for example uses.
 def run_kmeans(X, K, random_state=0, verbose=False):
     """Run K-means clustering."""
     if verbose:
@@ -182,7 +183,7 @@ def run_kmeans(X, K, random_state=0, verbose=False):
     
     return W, centers, rss, elapsed, silhouette, calinski
 
-
+# Reference from https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html .See more for example uses.
 def run_lda(X, K, random_state=0, verbose=False):
     """Run Latent Dirichlet Allocation."""
     if verbose:

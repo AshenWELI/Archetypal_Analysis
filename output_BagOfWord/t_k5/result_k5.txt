@@ -1,85 +1,6 @@
-PS C:\Users\PC> & C:/Users/PC/AppData/Local/Programs/Python/Python312/python.exe "d:/liu master/Statistics and ML/sem5/732A76 Research Project/project/Archetypal_Analysis/main.py"
-Checking for NIPS dataset files...
-Found: docword.nips.txt.gz
-Found: vocab.nips.txt
-Loading NIPS dataset...
-Dataset info: 1500 documents, 12419 words, 746316 entries
-  Processed 0/746316 entries...
-Using first 500 documents
-Converting to dense matrix...
-Final matrix shape: (500, 12419)
-
 Dataset shape: (500, 12419)
 Vocabulary size: 12419
 
-Running Archetypal Analysis with K=5 archetypes...
-
-Running Archetypal Analysis with K=5...
-Iteration   0, RSS = 1.9738e+02
-Iteration   5, RSS = 1.7843e+02
-Iteration  10, RSS = 1.7799e+02
-Iteration  15, RSS = 1.7787e+02
-Iteration  20, RSS = 1.7780e+02
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Running Archetypal Analysis with K=5 archetypes...
-
-Running Archetypal Analysis with K=5...
-Iteration   0, RSS = 1.9738e+02
-Iteration   5, RSS = 1.7843e+02
-Iteration  10, RSS = 1.7799e+02
-Iteration  15, RSS = 1.7787e+02
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Running Archetypal Analysis with K=5 archetypes...
-
-Running Archetypal Analysis with K=5...
-Iteration   0, RSS = 1.9738e+02
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Running Archetypal Analysis with K=5 archetypes...
-
-Running Archetypal Analysis with K=5...
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Running Archetypal Analysis with K=5 archetypes...
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Final matrix shape: (500, 12419)
-
-Dataset shape: (500, 12419)
-Final matrix shape: (500, 12419)
-
-Final matrix shape: (500, 12419)
-
-Final matrix shape: (500, 12419)
-
-Final matrix shape: (500, 12419)
-
-
-Dataset shape: (500, 12419)
-Vocabulary size: 12419
-
-Vocabulary size: 12419
-
-Running Archetypal Analysis with K=5 archetypes...
-
-Running Archetypal Analysis with K=5 archetypes...
 Running Archetypal Analysis with K=5 archetypes...
 
 Running Archetypal Analysis with K=5...
@@ -90,17 +11,17 @@ Iteration  15, RSS = 1.7787e+02
 Iteration  20, RSS = 1.7780e+02
 Iteration  25, RSS = 1.7777e+02
 Converged at iteration 29, RSS = 1.7777e+02
-  Completed in 985.52s, RSS = 3.5553e+02
+  Completed in 912.41s, RSS = 3.5553e+02
 
 Running NMF with K=5...
-  Completed in 3.19s, RSS = 3.4649e+02
+  Completed in 2.67s, RSS = 3.4649e+02
 
 Running K-means with K=5...
-  Completed in 2.23s, RSS = 3.6487e+02
+  Completed in 1.95s, RSS = 3.6487e+02
   Silhouette Score: 0.0180, Calinski-Harabasz: 10.65
 
 Running LDA with K=5...
-  Completed in 3.51s, RSS = 2.3897e+07
+  Completed in 3.32s, RSS = 2.3897e+07
   Perplexity: 11710.37
 
 ====================================================================================================
@@ -111,7 +32,7 @@ Metric                                   AA              NMF             K-means
 ----------------------------------------------------------------------------------------------------
 Reconstruction Error (RSS)               3.5553e+02      3.4649e+02      3.6487e+02      2.3897e+07
 RSS per Document                         7.1106e-01      6.9298e-01      7.2974e-01      4.7793e+04
-Computation Time (s)                     985.52          3.19            2.23            3.51
+Computation Time (s)                     912.41          2.67            1.95            3.32
 Avg Active Components/Doc                2.88            3.74            1.00            5.00
 Silhouette Score (K-means)               -               -               0.0180          -
 Calinski-Harabasz (K-means)              -               -               10.65           -
@@ -202,4 +123,78 @@ input (0.092)                  parameter (0.487)              weight (0.078)    
 set (0.066)                    object (0.360)                 data (0.062)                   sing (0.200)
 system (0.065)                 learning (0.343)               pattern (0.060)                amorphous (0.200)
 
+====================================================================================================
+RUNNING COMPREHENSIVE ANALYSIS
+====================================================================================================
+
+Computing comprehensive statistics...
+  ✓ Statistics computed for all methods
+
+====================================================================================================
+COMPREHENSIVE METHOD COMPARISON
+====================================================================================================
+
+Metric                                        NMF             AA              K-means         LDA
+----------------------------------------------------------------------------------------------------
+% Non-zero entries in S                        76.8%         59.0%         20.0%        100.0%
+Avg. cosine angle (degrees)                    74.6°         59.3°         45.7°         28.6°
+Reconstruction error (Frobenius)               111.64        18.86        19.10      4888.43
+Avg. active components/document                3.84         2.95         1.00         5.00
+
+====================================================================================================
+INTERPRETATION
+====================================================================================================
+• Lower % non-zero = More sparse (easier to interpret)
+• Higher cosine angle = More distinct components
+• Lower reconstruction error = Better fit to data
+• Lower active components = More focused representation
+====================================================================================================
+
+✓ Saved statistics to: comprehensive_statistics.csv
+
+Creating word comparison table...
+  ✓ Saved word table: word_comparison_table.png
+
+====================================================================================================
+✓ Comprehensive analysis complete!
+====================================================================================================
+
+Generated files:
+  • comprehensive_statistics.csv
+  • word_comparison_table.png
+
 Comparison plot saved as 'method_comparison_results.png'
+
+====================================================================================================
+CREATING AA CONVEX HULL VISUALIZATION
+====================================================================================================
+
+Creating AA convex hull visualization (K=5)...
+  Reducing to 2D with t-SNE...
+  Archetype positions in 2D: (5, 2)
+  ✓ Drew convex hull with 5 vertices
+  ✓ Saved: aa_convex_hull_K5.png
+  ✓ Saved: aa_convex_hull_K5.pdf
+
+ Key Findings:
+----------------------------------------------------------------------------------------------------
+  Sparsity (lower = better):
+    AA:      59.0% ✓ Best
+    NMF:     76.8%
+    K-means: 20.0%
+    LDA:     100.0%
+
+  Reconstruction Error (lower = better):
+    AA:      18.86 ✓ Best
+    NMF:     111.64
+    K-means: 19.10
+    LDA:     4888.43
+
+  Distinctiveness (higher = better):
+    AA:      59.3°
+    NMF:     74.6°
+    K-means: 45.7°
+    LDA:     28.6°
+
+====================================================================================================
+Analysis complete!

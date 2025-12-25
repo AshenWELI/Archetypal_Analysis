@@ -1,0 +1,262 @@
+TF-IDF Matrix shape: (500, 3285)
+Vocabulary size: 3285
+
+Running topic modeling with K=10...
+
+
+====================================================================================================
+SUMMARY STATISTICS
+====================================================================================================
+
+Metric                                   AA              NMF             K-means         LDA
+----------------------------------------------------------------------------------------------------
+Reconstruction Error (RSS)               4.4957e+02      4.4603e+02      4.5737e+02      2.6160e+06
+RSS per Document                         8.9914e-01      8.9206e-01      9.1474e-01      5.2319e+03
+Computation Time (s)                     354.84          0.77            0.86            1.44
+Avg Active Components/Doc                4.28            3.15            1.00            9.83
+Silhouette Score (K-means)               -               -               0.0081          -
+Calinski-Harabasz (K-means)              -               -               2.58            -
+Perplexity (LDA)                         -               -               -               27328.50
+====================================================================================================
+
+========================================================================================================================
+TOP WORDS COMPARISON
+========================================================================================================================
+
+========================================================================================================================
+Component/Topic/Cluster 1:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+sequence (0.112)               learning (1.229)               graph (0.259)                  conditional (0.884)
+attention (0.085)              data (0.878)                   node (0.077)                   code (0.788)
+translation (0.078)            meta (0.658)                   graphs (0.073)                 items (0.770)
+models (0.075)                 classifier (0.401)             learning (0.066)               hierarchy (0.762)
+memory (0.070)                 classification (0.387)         nodes (0.047)                  reduced (0.754)
+model (0.067)                  class (0.386)                  networks (0.044)               clustering (0.721)
+self (0.050)                   domain (0.373)                 classification (0.041)         mdp (0.713)
+art (0.037)                    unlabeled (0.369)              gnns (0.040)                   factors (0.697)
+english (0.034)                tasks (0.366)                  neural (0.036)                 traffic (0.692)
+lstm (0.034)                   classes (0.352)                representation (0.035)         pipeline (0.687)
+
+========================================================================================================================
+Component/Topic/Cluster 2:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+graph (0.363)                  graph (1.378)                  agents (0.110)                 path (1.134)
+node (0.146)                   node (0.525)                   agent (0.104)                  node (1.072)
+graphs (0.093)                 graphs (0.383)                 reward (0.103)                 vectors (0.940)
+representation (0.072)         representation (0.231)         policy (0.078)                 reasoning (0.805)
+learning (0.070)               gnns (0.218)                   learning (0.075)               principal (0.760)
+gnns (0.052)                   nodes (0.212)                  environment (0.070)            alignment (0.740)
+sequence (0.051)               sequence (0.201)               rewards (0.059)                minibatch (0.738)
+networks (0.049)               learning (0.194)               reinforcement (0.059)          relative (0.736)
+convolutional (0.048)          networks (0.189)               exploration (0.055)            invariant (0.730)
+classification (0.046)         convolutional (0.184)          rl (0.040)                     feedback (0.692)
+
+========================================================================================================================
+Component/Topic/Cluster 3:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+search (0.121)                 latent (0.978)                 networks (0.057)               quantization (2.588)
+pruning (0.104)                model (0.606)                  deep (0.046)                   box (1.936)
+quantization (0.102)           vae (0.601)                    object (0.040)                 resolution (1.592)
+compression (0.094)            variational (0.587)            network (0.036)                black (1.300)
+training (0.083)               compression (0.466)            neural (0.035)                 metric (0.949)
+architecture (0.071)           likelihood (0.378)             image (0.034)                  quantum (0.926)
+nas (0.070)                    data (0.369)                   images (0.030)                 theorem (0.847)
+precision (0.064)              variable (0.359)               learning (0.027)               quantized (0.837)
+accuracy (0.058)               representations (0.345)        method (0.026)                 pre (0.821)
+network (0.050)                vaes (0.270)                   functions (0.026)              documents (0.798)
+
+========================================================================================================================
+Component/Topic/Cluster 4:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+networks (0.096)               search (1.282)                 algorithms (0.095)             variation (1.112)
+deep (0.062)                   architecture (0.814)           learning (0.070)               width (1.020)
+neural (0.054)                 nas (0.641)                    optimization (0.066)           plasticity (1.012)
+network (0.051)                network (0.492)                algorithm (0.049)              node (0.981)
+linear (0.046)                 neural (0.408)                 problems (0.045)               reliable (0.980)
+dropout (0.045)                parameters (0.397)             function (0.042)               finite (0.956)
+layer (0.042)                  training (0.337)               policy (0.042)                 words (0.939)
+functions (0.041)              networks (0.306)               gradient (0.041)               detection (0.889)
+activation (0.041)             pruning (0.297)                sgd (0.037)                    adding (0.885)
+relu (0.037)                   architectures (0.266)          convergence (0.035)            structural (0.868)
+
+========================================================================================================================
+Component/Topic/Cluster 5:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+gradient (0.096)               language (0.960)               data (0.066)                   learning (20.915)
+sgd (0.093)                    models (0.796)                 model (0.055)                  model (15.908)
+optimization (0.092)           model (0.465)                  learning (0.038)               data (15.459)
+algorithms (0.084)             sequence (0.438)               representations (0.033)        training (15.209)
+convergence (0.066)            translation (0.410)            information (0.030)            networks (14.811)
+descent (0.058)                attention (0.364)              models (0.029)                 neural (13.222)
+algorithm (0.057)              text (0.347)                   approach (0.028)               models (13.178)
+stochastic (0.055)             word (0.307)                   variational (0.027)            network (12.076)
+learning (0.053)               task (0.232)                   training (0.027)               method (11.384)
+adam (0.038)                   machine (0.231)                prediction (0.026)             adversarial (10.939)
+
+========================================================================================================================
+Component/Topic/Cluster 6:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+reward (0.112)                 adversarial (1.546)            training (0.059)               dropout (1.056)
+policy (0.111)                 attacks (0.800)                compression (0.050)            metric (0.975)
+agent (0.096)                  examples (0.631)               network (0.040)                td (0.817)
+agents (0.094)                 robustness (0.613)             gradient (0.038)               dialog (0.695)
+environment (0.081)            attack (0.450)                 networks (0.037)               nas (0.691)
+learning (0.081)               defense (0.380)                quantization (0.035)           gain (0.689)
+exploration (0.068)            box (0.359)                    batch (0.033)                  nns (0.687)
+reinforcement (0.067)          training (0.291)               learning (0.032)               attempt (0.686)
+rewards (0.061)                black (0.249)                  layer (0.032)                  curiosity (0.677)
+policies (0.047)               image (0.223)                  deep (0.031)                   mcmc (0.676)
+
+========================================================================================================================
+Component/Topic/Cluster 7:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+learning (0.160)               policy (1.124)                 adversarial (0.178)            module (1.479)
+meta (0.126)                   reward (1.001)                 attacks (0.090)                interactions (0.877)
+data (0.096)                   agent (0.876)                  distribution (0.066)           learner (0.861)
+unlabeled (0.081)              agents (0.790)                 robustness (0.064)             event (0.721)
+classifier (0.075)             learning (0.726)               examples (0.063)               dropout (0.681)
+classes (0.070)                environment (0.712)            attack (0.048)                 rnns (0.677)
+labeled (0.066)                reinforcement (0.690)          training (0.045)               survival (0.670)
+class (0.060)                  exploration (0.662)            networks (0.041)               textual (0.670)
+shot (0.059)                   rewards (0.521)                box (0.039)                    speaker (0.656)
+domain (0.057)                 policies (0.442)               defense (0.036)                speech (0.649)
+
+========================================================================================================================
+Component/Topic/Cluster 8:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+latent (0.084)                 networks (0.568)               models (0.068)                 dropout (1.246)
+generative (0.077)             gradient (0.497)               labels (0.044)                 nas (0.844)
+distribution (0.073)           deep (0.416)                   model (0.040)                  driving (0.779)
+gan (0.054)                    convergence (0.393)            data (0.039)                   quantum (0.734)
+variational (0.049)            sgd (0.385)                    memory (0.038)                 collapse (0.722)
+models (0.049)                 optimization (0.344)           label (0.035)                  tabular (0.694)
+data (0.048)                   neural (0.328)                 decoder (0.035)                particle (0.661)
+model (0.048)                  linear (0.308)                 learning (0.030)               federated (0.645)
+gans (0.045)                   training (0.299)               text (0.030)                   kernel (0.612)
+vae (0.044)                    function (0.290)               long (0.029)                   unknown (0.600)
+
+========================================================================================================================
+Component/Topic/Cluster 9:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+adversarial (0.302)            distribution (1.208)           embeddings (0.092)             nonlinear (0.957)
+attacks (0.152)                gans (1.023)                   word (0.074)                   net (0.947)
+examples (0.120)               gan (0.869)                    embedding (0.057)              kernel (0.737)
+robustness (0.109)             generative (0.864)             unsupervised (0.054)           depends (0.669)
+attack (0.089)                 samples (0.632)                latent (0.054)                 bounds (0.662)
+defense (0.079)                target (0.485)                 riemannian (0.046)             change (0.659)
+training (0.067)               distributions (0.480)          sentence (0.042)               recovery (0.633)
+box (0.066)                    training (0.476)               data (0.040)                   lipschitz (0.611)
+black (0.043)                  adversarial (0.408)            space (0.038)                  downstream (0.588)
+defenses (0.043)               sample (0.342)                 learning (0.037)               distances (0.587)
+
+========================================================================================================================
+Component/Topic/Cluster 10:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+language (0.134)               embeddings (0.703)             search (0.086)                 valued (0.822)
+word (0.087)                   object (0.494)                 language (0.074)               densenet (0.791)
+representations (0.071)        representation (0.448)         models (0.059)                 mixed (0.673)
+embeddings (0.064)             representations (0.442)        architecture (0.053)           correction (0.663)
+models (0.056)                 embedding (0.383)              training (0.052)               ste (0.608)
+sentence (0.050)               space (0.361)                  model (0.052)                  equation (0.554)
+words (0.041)                  3d (0.347)                     neural (0.044)                 topics (0.539)
+relations (0.041)              scene (0.338)                  learning (0.043)               nash (0.525)
+model (0.039)                  objects (0.318)                parameters (0.042)             bag (0.522)
+object (0.038)                 word (0.317)                   nas (0.038)                    vaes (0.521)
+
+====================================================================================================
+RUNNING COMPREHENSIVE ANALYSIS
+====================================================================================================
+
+Computing comprehensive statistics...
+  ✓ Statistics computed for all methods
+
+====================================================================================================
+COMPREHENSIVE METHOD COMPARISON
+====================================================================================================
+
+Metric                                        NMF             AA              K-means         LDA
+----------------------------------------------------------------------------------------------------
+% Non-zero entries in S                        51.7%         46.6%         10.0%        100.0%
+Avg. cosine angle (degrees)                    79.1°         73.8°         64.1°         46.4°
+Reconstruction error (Frobenius)                21.12        21.20        21.39      1617.40
+Avg. active components/document                5.17         4.66         1.00        10.00
+
+====================================================================================================
+INTERPRETATION
+====================================================================================================
+• Lower % non-zero = More sparse (easier to interpret)
+• Higher cosine angle = More distinct components
+• Lower reconstruction error = Better fit to data
+• Lower active components = More focused representation
+====================================================================================================
+
+✓ Saved statistics to: comprehensive_statistics.csv
+
+Creating word comparison table...
+  ✓ Saved word table: word_comparison_table.png
+
+====================================================================================================
+✓ Comprehensive analysis complete!
+====================================================================================================
+
+Generated files:
+  • comprehensive_statistics.csv
+  • word_comparison_table.png
+
+Comparison plot saved as 'method_comparison_results.png'
+
+====================================================================================================
+CREATING AA CONVEX HULL VISUALIZATION
+====================================================================================================
+
+Creating AA convex hull visualization (K=10)...
+  Reducing to 2D with t-SNE...
+  Archetype positions in 2D: (10, 2)
+  ✓ Drew convex hull with 6 vertices
+  ✓ Saved: aa_convex_hull_K10.png
+  ✓ Saved: aa_convex_hull_K10.pdf
+
+ Key Findings:
+----------------------------------------------------------------------------------------------------
+  Sparsity (lower = better):
+    AA:      46.6% ✓ Best
+    NMF:     51.7%
+    K-means: 10.0%
+    LDA:     100.0%
+
+  Reconstruction Error (lower = better):
+    AA:      21.20
+    NMF:     21.12
+    K-means: 21.39
+    LDA:     1617.40
+
+  Distinctiveness (higher = better):
+    AA:      73.8°
+    NMF:     79.1°
+    K-means: 64.1°
+    LDA:     46.4°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis>

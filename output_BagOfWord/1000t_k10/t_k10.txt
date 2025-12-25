@@ -1,0 +1,287 @@
+Dataset shape: (1000, 12419)
+Vocabulary size: 12419
+
+Running Archetypal Analysis with K=10 archetypes...
+
+Running Archetypal Analysis with K=10...
+Iteration   0, RSS = 3.7611e+02
+Iteration   5, RSS = 3.4132e+02
+Iteration  10, RSS = 3.4085e+02
+Iteration  15, RSS = 3.4011e+02
+Iteration  20, RSS = 3.3956e+02
+Iteration  25, RSS = 3.3952e+02
+Iteration  30, RSS = 3.3943e+02
+Iteration  35, RSS = 3.3934e+02
+Iteration  40, RSS = 3.3930e+02
+Converged at iteration 42, RSS = 3.3929e+02
+  Completed in 7140.97s, RSS = 6.7858e+02
+
+Running NMF with K=10...
+  Completed in 9.87s, RSS = 6.5121e+02
+
+Running K-means with K=10...
+  Completed in 7.50s, RSS = 7.1542e+02
+  Silhouette Score: 0.0185, Calinski-Harabasz: 13.90
+
+Running LDA with K=10...
+  Completed in 8.68s, RSS = 1.6788e+08
+  Perplexity: 11988.14
+
+====================================================================================================
+SUMMARY STATISTICS
+====================================================================================================
+
+Metric                                   AA              NMF             K-means         LDA
+----------------------------------------------------------------------------------------------------
+Reconstruction Error (RSS)               6.7858e+02      6.5121e+02      7.1542e+02      1.6788e+08
+RSS per Document                         6.7858e-01      6.5121e-01      7.1542e-01      1.6788e+05
+Computation Time (s)                     7140.97         9.87            7.50            8.68
+Avg Active Components/Doc                4.24            6.45            1.00            1.45
+Silhouette Score (K-means)               -               -               0.0185          -
+Calinski-Harabasz (K-means)              -               -               13.90           -
+Perplexity (LDA)                         -               -               -               11988.14
+====================================================================================================
+
+========================================================================================================================
+TOP WORDS COMPARISON
+========================================================================================================================
+
+========================================================================================================================
+Component/Topic/Cluster 1:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+cell (0.387)                   input (3.878)                  network (0.141)                network (185.544)
+model (0.144)                  weight (3.266)                 training (0.133)               model (99.585)
+input (0.132)                  output (2.608)                 set (0.116)                    learning (97.293)
+field (0.092)                  layer (0.904)                  classifier (0.105)             input (93.335)
+response (0.074)               vector (0.779)                 recognition (0.097)            function (88.466)
+direction (0.073)              chip (0.652)                   system (0.092)                 neural (88.270)
+visual (0.073)                 circuit (0.609)                input (0.080)                  system (71.452)
+orientation (0.071)            function (0.592)               neural (0.078)                 set (66.835)
+neuron (0.071)                 analog (0.541)                 pattern (0.077)                unit (66.269)
+cortex (0.067)                 net (0.514)                    word (0.076)                   training (63.195)
+
+========================================================================================================================
+Component/Topic/Cluster 2:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+function (0.512)               system (1.750)                 function (0.184)               sulu (0.491)
+network (0.154)                recognition (1.183)            algorithm (0.141)              mauthner (0.487)
+input (0.105)                  image (0.878)                  data (0.105)                   defender (0.410)
+approximation (0.100)          object (0.774)                 learning (0.102)               rulenet (0.345)
+threshold (0.087)              speech (0.722)                 network (0.097)                vpp (0.322)
+number (0.082)                 word (0.597)                   set (0.089)                    vtp (0.321)
+neural (0.079)                 neural (0.546)                 problem (0.087)                php (0.301)
+set (0.072)                    feature (0.539)                point (0.073)                  mntn (0.294)
+linear (0.071)                 features (0.500)               input (0.071)                  ntn (0.266)
+result (0.071)                 images (0.494)                 error (0.063)                  c20 (0.215)
+
+========================================================================================================================
+Component/Topic/Cluster 3:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+neuron (0.513)                 neuron (3.963)                 network (0.266)                equalizer (0.571)
+network (0.193)                neural (0.650)                 neural (0.173)                 vmos (0.476)
+model (0.122)                  system (0.605)                 system (0.168)                 preposition (0.455)
+input (0.114)                  synaptic (0.540)               neuron (0.134)                 rankprop (0.364)
+neural (0.104)                 circuit (0.534)                dynamic (0.110)                nlist (0.343)
+firing (0.084)                 spike (0.533)                  point (0.090)                  bat (0.335)
+spike (0.079)                  firing (0.521)                 function (0.087)               bees (0.334)
+function (0.078)               pattern (0.516)                pattern (0.083)                glint (0.324)
+circuit (0.076)                dynamic (0.434)                equation (0.076)               simmon (0.265)
+synaptic (0.075)               current (0.427)                model (0.071)                  nectar (0.262)
+
+========================================================================================================================
+Component/Topic/Cluster 4:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+model (0.540)                  function (4.318)               unit (0.332)                   art2 (0.530)
+data (0.185)                   algorithm (1.365)              network (0.275)                schemas (0.391)
+network (0.109)                point (1.144)                  input (0.167)                  aisb (0.349)
+parameter (0.092)              problem (1.026)                hidden (0.125)                 rmhc (0.283)
+neural (0.080)                 approximation (0.839)          learning (0.116)               iga (0.250)
+set (0.070)                    result (0.732)                 output (0.104)                 intron (0.100)
+function (0.069)               linear (0.686)                 weight (0.097)                 datapoint (0.100)
+system (0.065)                 number (0.683)                 function (0.080)               jong (0.100)
+learning (0.064)               distribution (0.600)           layer (0.078)                  alfred (0.100)
+algorithm (0.060)              space (0.593)                  training (0.074)               espe (0.100)
+
+========================================================================================================================
+Component/Topic/Cluster 5:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+learning (0.418)               model (6.079)                  neuron (0.289)                 vlvp (0.513)
+algorithm (0.224)              data (1.148)                   network (0.136)                tpdp (0.453)
+function (0.128)               parameter (0.737)              model (0.135)                  ild (0.436)
+action (0.098)                 distribution (0.400)           input (0.128)                  harmonet (0.428)
+system (0.087)                 prediction (0.384)             neural (0.097)                 lissom (0.413)
+problem (0.084)                control (0.321)                cell (0.085)                   ppl (0.386)
+reinforcement (0.075)          likelihood (0.298)             firing (0.069)                 bpl (0.386)
+control (0.074)                probability (0.290)            system (0.066)                 chorale (0.362)
+policy (0.066)                 input (0.268)                  function (0.065)               art1 (0.340)
+result (0.057)                 term (0.261)                   synaptic (0.064)               chorales (0.308)
+
+========================================================================================================================
+Component/Topic/Cluster 6:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+training (0.184)               learning (5.908)               network (0.385)                forgeries (0.627)
+classifier (0.152)             algorithm (1.978)              neural (0.147)                 nnc2 (0.422)
+set (0.141)                    system (0.892)                 input (0.116)                  separator (0.370)
+word (0.118)                   control (0.832)                training (0.091)               hrn (0.368)
+recognition (0.115)            action (0.771)                 output (0.082)                 apobayesian (0.292)
+speech (0.111)                 task (0.728)                   function (0.081)               sasb (0.277)
+network (0.107)                problem (0.652)                set (0.079)                    indecision (0.223)
+data (0.098)                   error (0.630)                  system (0.072)                 winnow (0.212)
+system (0.095)                 gradient (0.588)               weight (0.068)                 sbsb (0.182)
+performance (0.079)            step (0.586)                   data (0.065)                   forgery (0.144)
+
+========================================================================================================================
+Component/Topic/Cluster 7:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+network (0.591)                network (4.395)                learning (0.225)               hobson (0.536)
+neural (0.213)                 neural (1.519)                 weight (0.208)                 dolphin (0.425)
+input (0.097)                  system (0.249)                 network (0.194)                fourgram (0.403)
+output (0.095)                 recurrent (0.248)              error (0.143)                  router (0.361)
+system (0.084)                 result (0.183)                 input (0.118)                  mamelak (0.308)
+problem (0.066)                training (0.182)               training (0.114)               pgo (0.266)
+weight (0.066)                 architecture (0.171)           function (0.108)               nrem (0.260)
+learning (0.065)               problem (0.171)                neural (0.093)                 rmin (0.255)
+training (0.064)               performance (0.148)            output (0.080)                 gateway (0.252)
+recurrent (0.059)              pattern (0.131)                algorithm (0.077)              roitblat (0.235)
+
+========================================================================================================================
+Component/Topic/Cluster 8:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+system (0.103)                 cell (2.618)                   model (0.384)                  parsec (0.805)
+image (0.094)                  field (0.979)                  network (0.121)                portfolio (0.556)
+object (0.086)                 visual (0.822)                 data (0.106)                   janus (0.490)
+motion (0.085)                 direction (0.720)              neural (0.080)                 uran (0.432)
+point (0.079)                  input (0.693)                  system (0.074)                 unlearning (0.409)
+model (0.067)                  motion (0.582)                 set (0.072)                    vqpca (0.351)
+visual (0.060)                 response (0.566)               parameter (0.069)              semenov (0.321)
+images (0.059)                 cortex (0.561)                 function (0.064)               plakhov (0.261)
+map (0.051)                    orientation (0.513)            algorithm (0.061)              ances (0.100)
+output (0.049)                 receptive (0.486)              training (0.056)               women (0.100)
+
+========================================================================================================================
+Component/Topic/Cluster 9:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+unit (0.454)                   training (2.240)               cell (0.128)                   harmony (1.092)
+network (0.272)                set (1.804)                    model (0.115)                  exon (0.614)
+hidden (0.187)                 data (1.572)                   system (0.080)                 nsr (0.524)
+input (0.176)                  error (1.565)                  input (0.080)                  swimming (0.405)
+learning (0.137)               classifier (0.709)             visual (0.077)                 lamprey (0.396)
+output (0.130)                 performance (0.655)            motion (0.063)                 wattle (0.392)
+layer (0.114)                  method (0.624)                 field (0.062)                  arrhythmia (0.391)
+weight (0.111)                 test (0.607)                   direction (0.057)              dbt (0.388)
+training (0.091)               number (0.546)                 unit (0.050)                   mm_vector (0.383)
+pattern (0.090)                classification (0.511)         network (0.049)                lraam (0.379)
+
+========================================================================================================================
+Component/Topic/Cluster 10:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+weight (0.337)                 unit (2.834)                   learning (0.342)               rivalry (0.486)
+error (0.268)                  network (1.157)                model (0.111)                  hrr (0.404)
+network (0.198)                hidden (1.086)                 system (0.103)                 sardnet (0.343)
+training (0.190)               input (0.623)                  function (0.102)               volcanoes (0.307)
+learning (0.162)               layer (0.608)                  control (0.100)                volcano (0.258)
+generalization (0.136)         pattern (0.438)                algorithm (0.099)              flee (0.235)
+set (0.119)                    output (0.407)                 action (0.095)                 labeller (0.226)
+noise (0.084)                  weight (0.373)                 task (0.083)                   contextualized (0.176)
+input (0.082)                  learning (0.314)               network (0.081)                forbus (0.151)
+function (0.074)               training (0.309)               problem (0.067)                flank (0.101)
+
+====================================================================================================
+RUNNING COMPREHENSIVE ANALYSIS
+====================================================================================================
+
+Computing comprehensive statistics...
+  ✓ Statistics computed for all methods
+
+====================================================================================================
+COMPREHENSIVE METHOD COMPARISON
+====================================================================================================
+
+Metric                                        NMF             AA              K-means         LDA
+----------------------------------------------------------------------------------------------------
+% Non-zero entries in S                        69.7%         44.6%         10.0%        100.0%
+Avg. cosine angle (degrees)                    81.9°         66.2°         50.6°         20.8°
+Reconstruction error (Frobenius)                85.11        26.05        26.75     12956.76
+Avg. active components/document                6.97         4.46         1.00        10.00
+
+====================================================================================================
+INTERPRETATION
+====================================================================================================
+• Lower % non-zero = More sparse (easier to interpret)
+• Higher cosine angle = More distinct components
+• Lower reconstruction error = Better fit to data
+• Lower active components = More focused representation
+====================================================================================================
+
+✓ Saved statistics to: comprehensive_statistics.csv
+
+Creating word comparison table...
+  ✓ Saved word table: word_comparison_table.png
+
+====================================================================================================
+✓ Comprehensive analysis complete!
+====================================================================================================
+
+Generated files:
+  • comprehensive_statistics.csv
+  • word_comparison_table.png
+
+Comparison plot saved as 'method_comparison_results.png'
+
+====================================================================================================
+CREATING AA CONVEX HULL VISUALIZATION
+====================================================================================================
+
+Creating AA convex hull visualization (K=10)...
+  Reducing to 2D with t-SNE...
+  Archetype positions in 2D: (10, 2)
+  ✓ Drew convex hull with 6 vertices
+  ✓ Saved: aa_convex_hull_K10.png
+  ✓ Saved: aa_convex_hull_K10.pdf
+
+ Key Findings:
+----------------------------------------------------------------------------------------------------
+  Sparsity (lower = better):
+    AA:      44.6% ✓ Best
+    NMF:     69.7%
+    K-means: 10.0%
+    LDA:     100.0%
+
+  Reconstruction Error (lower = better):
+    AA:      26.05 ✓ Best
+    NMF:     85.11
+    K-means: 26.75
+    LDA:     12956.76
+
+  Distinctiveness (higher = better):
+
+
+  Distinctiveness (higher = better):
+    AA:      66.2°
+    NMF:     81.9°
+    K-means: 50.6°
+    LDA:     20.8°
+
+====================================================================================================
+Analysis complete!
+===============================

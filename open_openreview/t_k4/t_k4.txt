@@ -1,0 +1,167 @@
+Loaded 500 abstracts from data/openreview_data/ICLR_2019_papers.jsonl
+TF-IDF Matrix shape: (500, 3285)
+Vocabulary size: 3285
+
+Running topic modeling with K=4...
+
+
+====================================================================================================
+SUMMARY STATISTICS
+====================================================================================================
+
+Metric                                   AA              NMF             K-means         LDA
+----------------------------------------------------------------------------------------------------
+Reconstruction Error (RSS)               4.6539e+02      4.6355e+02      4.6840e+02      5.0834e+06
+RSS per Document                         9.3079e-01      9.2710e-01      9.3679e-01      1.0167e+04
+Computation Time (s)                     239.73          0.25            0.94            1.77
+Avg Active Components/Doc                2.48            2.60            1.00            4.00
+Silhouette Score (K-means)               -               -               0.0075          -
+Calinski-Harabasz (K-means)              -               -               3.76            -
+Perplexity (LDA)                         -               -               -               7139.04
+====================================================================================================
+
+========================================================================================================================
+TOP WORDS COMPARISON
+========================================================================================================================
+
+========================================================================================================================
+Component/Topic/Cluster 1:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+policy (0.110)                 adversarial (2.039)            networks (0.060)               rewards (2.571)
+reward (0.100)                 attacks (0.945)                gradient (0.045)               imitation (2.377)
+learning (0.093)               examples (0.784)               deep (0.042)                   goals (1.435)
+agent (0.087)                  robustness (0.731)             training (0.042)               demonstration (1.319)
+agents (0.083)                 attack (0.528)                 network (0.041)                exploration (1.241)
+reinforcement (0.073)          training (0.511)               neural (0.040)                 curiosity (1.192)
+environment (0.071)            defense (0.447)                convergence (0.037)            demonstrations (1.167)
+exploration (0.063)            box (0.421)                    sgd (0.034)                    skills (1.001)
+rewards (0.055)                distribution (0.367)           learning (0.034)               molecules (0.867)
+policies (0.045)               image (0.319)                  layer (0.030)                  replay (0.763)
+
+========================================================================================================================
+Component/Topic/Cluster 2:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+adversarial (0.264)            policy (0.796)                 data (0.047)                   rewards (0.251)
+attacks (0.129)                learning (0.752)               model (0.041)                  plan (0.251)
+examples (0.098)               reward (0.687)                 learning (0.038)               io (0.251)
+robustness (0.091)             agent (0.617)                  models (0.036)                 opponents (0.251)
+training (0.071)               agents (0.568)                 training (0.027)               replay (0.251)
+attack (0.071)                 reinforcement (0.525)          representations (0.024)        hindsight (0.251)
+defense (0.062)                environment (0.496)            neural (0.023)                 successes (0.251)
+box (0.059)                    exploration (0.460)            language (0.022)               purely (0.251)
+distribution (0.045)           rewards (0.361)                latent (0.022)                 dithering (0.251)
+black (0.039)                  algorithms (0.331)             method (0.022)                 goals (0.251)
+
+========================================================================================================================
+Component/Topic/Cluster 3:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+models (0.051)                 data (0.671)                   adversarial (0.110)            quantum (1.680)
+data (0.051)                   model (0.652)                  attacks (0.054)                circuit (0.371)
+model (0.050)                  models (0.634)                 networks (0.046)               primitive (0.277)
+language (0.038)               language (0.464)               robustness (0.042)             exhibiting (0.264)
+representations (0.037)        learning (0.455)               examples (0.042)               optimally (0.263)
+learning (0.036)               graph (0.452)                  network (0.040)                amplification (0.262)
+graph (0.035)                  representations (0.439)        training (0.039)               processor (0.262)
+latent (0.031)                 latent (0.379)                 neural (0.039)                 discriminate (0.262)
+representation (0.030)         representation (0.364)         distribution (0.039)           discrimination (0.262)
+embeddings (0.028)             tasks (0.311)                  search (0.034)                 distinguishes (0.261)
+
+========================================================================================================================
+Component/Topic/Cluster 4:
+========================================================================================================================
+AA                             NMF                            K-means                        LDA
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+networks (0.061)               networks (0.723)               policy (0.090)                 learning (21.064)
+neural (0.042)                 network (0.516)                learning (0.084)               model (16.057)
+training (0.042)               neural (0.508)                 agent (0.083)                  data (15.608)
+gradient (0.041)               training (0.493)               agents (0.077)                 training (15.359)
+network (0.041)                deep (0.471)                   reward (0.075)                 networks (14.961)
+deep (0.036)                   gradient (0.471)               reinforcement (0.063)          neural (13.371)
+convergence (0.030)            optimization (0.343)           environment (0.058)            models (13.328)
+optimization (0.029)           loss (0.341)                   exploration (0.053)            network (12.225)
+function (0.029)               function (0.337)               algorithms (0.045)             method (11.533)
+sgd (0.028)                    convergence (0.326)            rewards (0.043)                adversarial (11.089)
+
+====================================================================================================
+RUNNING COMPREHENSIVE ANALYSIS
+====================================================================================================
+
+Computing comprehensive statistics...
+  ✓ Statistics computed for all methods
+
+====================================================================================================
+COMPREHENSIVE METHOD COMPARISON
+====================================================================================================
+
+Metric                                        NMF             AA              K-means         LDA
+----------------------------------------------------------------------------------------------------
+% Non-zero entries in S                        66.7%         64.5%         25.0%        100.0%
+Avg. cosine angle (degrees)                    73.6°         68.5°         59.4°         31.0°
+Reconstruction error (Frobenius)                53.78        21.57        21.64      2254.65
+Avg. active components/document                2.67         2.58         1.00         4.00
+
+====================================================================================================
+INTERPRETATION
+====================================================================================================
+• Lower % non-zero = More sparse (easier to interpret)
+• Higher cosine angle = More distinct components
+• Lower reconstruction error = Better fit to data
+• Lower active components = More focused representation
+====================================================================================================
+
+✓ Saved statistics to: comprehensive_statistics.csv
+
+Creating word comparison table...
+  ✓ Saved word table: word_comparison_table.png
+
+====================================================================================================
+✓ Comprehensive analysis complete!
+====================================================================================================
+
+Generated files:
+  • comprehensive_statistics.csv
+  • word_comparison_table.png
+
+Comparison plot saved as 'method_comparison_results.png'
+
+====================================================================================================
+CREATING AA CONVEX HULL VISUALIZATION
+====================================================================================================
+
+Creating AA convex hull visualization (K=4)...
+  Reducing to 2D with t-SNE...
+  Archetype positions in 2D: (4, 2)
+  ✓ Drew convex hull with 4 vertices
+  ✓ Saved: aa_convex_hull_K4.png
+  ✓ Saved: aa_convex_hull_K4.pdf
+
+ Key Findings:
+----------------------------------------------------------------------------------------------------
+  Sparsity (lower = better):
+    AA:      64.5% ✓ Best
+    NMF:     66.7%
+    K-means: 25.0%
+    LDA:     100.0%
+
+  Reconstruction Error (lower = better):
+    AA:      21.57 ✓ Best
+    NMF:     53.78
+    K-means: 21.64
+    LDA:     2254.65
+
+  Distinctiveness (higher = better):
+    AA:      68.5°
+    NMF:     73.6°
+    K-means: 59.4°
+    LDA:     31.0°
+
+====================================================================================================
+Analysis complete!
+====================================================================================================
+PS D:\liu master\Statistics and ML\sem5\732A76 Research Project\project\Archetypal_Analysis> 

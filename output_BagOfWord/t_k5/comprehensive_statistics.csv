@@ -1,0 +1,5 @@
+Method,Sparsity_%,Distinctiveness_deg,Reconstruction_Error,Avg_Active_Components
+NMF,76.80,74.58,111.64,3.84
+AA,59.00,59.27,18.86,2.95
+K-means,20.00,45.68,19.10,1.00
+LDA,100.00,28.61,4888.43,5.00
